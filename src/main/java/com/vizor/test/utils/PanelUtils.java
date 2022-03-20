@@ -60,11 +60,8 @@ public class PanelUtils {
         displayTo = (currentPageNumber * MAX_IMAGES_PER_PAGE) - 1;
         int displayFrom = (displayTo - MAX_IMAGES_PER_PAGE) + 1;
 
-        if (allFiles.length - ((MAX_IMAGES_PER_PAGE - 1) * currentPageNumber) < MAX_IMAGES_PER_PAGE - 1) {
-            int max = ((MAX_IMAGES_PER_PAGE) * currentPageNumber);
-            int needToMinus = (max - allFiles.length) + 1;
+        if (displayTo > allFiles.length - 1) {
             displayTo = allFiles.length - 1;
-            displayFrom = displayTo - (MAX_IMAGES_PER_PAGE - needToMinus);
         }
         return displayFrom;
     }
