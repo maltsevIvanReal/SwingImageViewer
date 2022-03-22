@@ -1,11 +1,14 @@
 package com.vizor.test.utils;
 
+import com.vizor.test.ImageViewer;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class PanelUtils {
     private static BufferedImage[] imagesCurrentPage;
@@ -38,17 +41,17 @@ public class PanelUtils {
         mainJPanel.setPreferredSize(new Dimension(FrameUtils.getWIDTH(), FrameUtils.getHEIGHT()));
     }
 
-    public static synchronized void fillImageContainer(File[] allFiles, int displayFrom, JLabel[] label, JPanel jPanel) {
+    public static void fillImageContainer(ArrayList<File> allFiles, int displayFrom, JLabel[] label, JPanel imagesPanel, JFrame mainJFrame) {
         int countImagesToFill = displayTo - displayFrom;
         for (int i = 0; i <= countImagesToFill; i++) {
             try {
-                imagesCurrentPage[i] = ImageIO.read(allFiles[displayFrom]);
+                imagesCurrentPage[i] = ImageIO.read(allFiles.get(displayFrom));
                 label[i] = new JLabel();
                 ImageIcon imageIcon = new ImageIcon(new ImageIcon(imagesCurrentPage[i]).getImage().getScaledInstance(45, 45, Image.SCALE_DEFAULT));
                 label[i].setIcon(imageIcon);
                 label[i].setHorizontalAlignment(SwingConstants.CENTER);
                 label[i].setVerticalAlignment(SwingConstants.CENTER);
-                jPanel.add(label[i]);
+                imagesPanel.add(label[i]);
                 displayFrom++;
             } catch (IOException e) {
                 e.printStackTrace();
@@ -56,12 +59,12 @@ public class PanelUtils {
         }
     }
 
-    public static int getDisplayFrom(int currentPageNumber, File[] allFiles) {
+    public static int getDisplayFrom(int currentPageNumber, ArrayList<File> allFiles) {
         displayTo = (currentPageNumber * MAX_IMAGES_PER_PAGE) - 1;
         int displayFrom = (displayTo - MAX_IMAGES_PER_PAGE) + 1;
 
-        if (displayTo > allFiles.length - 1) {
-            displayTo = allFiles.length - 1;
+        if (displayTo > allFiles.size() - 1) {
+            displayTo = allFiles.size() - 1;
         }
         return displayFrom;
     }
@@ -70,4 +73,28 @@ public class PanelUtils {
         PanelUtils.imagesCurrentPage = imagesCurrentPage;
     }
 
+    public static void addLoaderAtImagePage() {
+        Icon imgIcon = new ImageIcon("loading.gif");
+        JLabel label = new JLabel(imgIcon);
+        ImageViewer.getImagesPanel().setLayout(new GridLayout());
+        ImageViewer.setLoaderImage(label);
+        ImageViewer.getImagesPanel().add(label);
+        ImageViewer.getMainJFrame().getContentPane().invalidate();
+        ImageViewer.getMainJFrame().getContentPane().validate();
+        ImageViewer.getImagesPanel().setLayout(new FlowLayout(FlowLayout.LEFT, HGAP, VGAP));
+
+//        ImageIcon loading = new ImageIcon("ajax-loader.gif");
+//        JLabel jLabel = new JLabel(loading);
+//        ImageViewer.setLoaderImage(jLabel);
+//
+//        jLabel.add(new JLabel("loading... ", loading, JLabel.CENTER));
+//        jLabel.setSize(400, 300);
+//        jLabel.setVisible(true);
+//        JPanel imagesPanel = ImageViewer.getImagesPanel();
+//        imagesPanel.add(imagesPanel);
+    }
+    public static void clearJPanel(JPanel jPanel) {
+        jPanel.removeAll();
+        jPanel.repaint();
+    }
 }

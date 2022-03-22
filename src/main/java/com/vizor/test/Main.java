@@ -4,8 +4,7 @@ import javax.swing.*;
 
 public class Main {
     public void run() {
-        ImageViewer imageViewer = ImageViewer.createImageViewer();
-        imageViewer.constructImageViewer();
+        ImageViewer.constructImageViewer();
     }
 
     public static void main(String[] args) {
