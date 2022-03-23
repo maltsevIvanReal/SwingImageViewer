@@ -10,14 +10,9 @@ public class FileUtils {
         return new File(fileName);
     }
 
-    public static ArrayList<File> getListOfFiles(File path) {
-        return new ArrayList<>(Arrays.asList(path.listFiles()));
-    }
-
     public static int getCountFiles(ArrayList<File> files) {
         return files.size();
     }
-
 
     public static ArrayList<File> getSortedFilesByLastModified(File path) {
         File[] files = path.listFiles();
@@ -43,6 +38,5 @@ public class FileUtils {
         for (Map.Entry<String, String> entry : filters.entrySet()) {
             fc.setFileFilter(new FileNameExtensionFilter(entry.getKey(), entry.getValue()));
         }
-
     }
 }

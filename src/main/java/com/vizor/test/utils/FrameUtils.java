@@ -7,10 +7,6 @@ public class FrameUtils {
     private static final int WIDTH = 1024;
     private static final int HEIGHT = 768;
 
-    public static JFrame createMainJFrame() {
-        return new JFrame("DT Developer Test");
-    }
-
     public static int getWIDTH() {
         return WIDTH;
     }
@@ -19,10 +15,12 @@ public class FrameUtils {
         return HEIGHT;
     }
 
-
     public static void setOptions(JFrame frame) {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setMaximumSize(new Dimension(WIDTH, HEIGHT));
         frame.setResizable(false);
+        frame.pack();
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
     }
 }
