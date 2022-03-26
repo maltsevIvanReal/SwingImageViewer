@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class ImagesPanel extends JPanel {
-    public static final int MAX_IMAGES_PER_PAGE = 40;
+    public static final int MAX_IMAGES_PER_PAGE = 1;
     public static final int HGAP = 45;
     public static final int VGAP = 45;
 
@@ -40,6 +40,14 @@ public class ImagesPanel extends JPanel {
         imagesCurrentPage = new BufferedImage[MAX_IMAGES_PER_PAGE];
         displayFrom = getDisplayFrom(currentPageSelected, allFiles);
         fillImagesPanel(allFiles, displayFrom, labels, this);
+
+        int countAllFiles = FileUtils.getCountFiles(getAllFiles());
+        int countOfPages = JComboBoxUtils.calculateCountImagePages(countAllFiles);
+        String[] pagesAsArray = JComboBoxUtils.getPagesAsArray(countOfPages);
+        setPagesAsArray(pagesAsArray);
+
+        setLabels(JLabelUtils.createJLabelArray());
+
     }
 
     public void addLoaderAtImagePage(JFrame mainFrame) {
@@ -92,10 +100,9 @@ public class ImagesPanel extends JPanel {
         imagesPanel.setDisplayFrom(getDisplayFrom(imagesPanel.currentPageSelected, allFiles));
         pagesAsArray = JComboBoxUtils.getPagesAsArray(countOfPages);
 
-        functionalPanel.setjComboBox(new JComboBox(pagesAsArray));
+        functionalPanel.updatePagesComboBox(pagesAsArray);
         imagesPanel.setLabels(JLabelUtils.createJLabelArray());
 
-        JPanelConfigurator.setPaginateActionListener(functionalPanel, imagesPanel);
         PanelUtils.packJPanels(imagesPanel, functionalPanel);
         JComboBox jComboBox = functionalPanel.getjComboBox();
 

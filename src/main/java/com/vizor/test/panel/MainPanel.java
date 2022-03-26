@@ -13,11 +13,10 @@ public class MainPanel extends JPanel {
         setBorder(BorderFactory.createLineBorder(Color.ORANGE));
 
         ImagesPanel imagesPanel = new ImagesPanel();
-        FunctionalPanel functionalPanel = new FunctionalPanel();
+        FunctionalPanel functionalPanel = new FunctionalPanel(imagesPanel);
 
         add(imagesPanel);
         add(functionalPanel);
 
-        JPanelConfigurator.configureFunctionalAndImgPanels(functionalPanel, imagesPanel);
     }
 }

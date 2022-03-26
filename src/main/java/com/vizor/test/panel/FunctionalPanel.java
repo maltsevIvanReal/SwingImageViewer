@@ -4,13 +4,19 @@ import javax.swing.*;
 import java.awt.*;
 
 public class FunctionalPanel extends JPanel {
-    private JButton uploadImageButton;
-    private JComboBox jComboBox;
+    private JButtonUploadFile uploadImageButton;
+    private JComboBoxPaginator jComboBox;
+    private ImagesPanel imagesPanel;
 
-    public FunctionalPanel() {
+    public FunctionalPanel(ImagesPanel leftImagesPanel) {
+        imagesPanel = leftImagesPanel;
         setBorder(BorderFactory.createLineBorder(Color.BLACK));
-        uploadImageButton = new JButton("Upload new image");
+
+        uploadImageButton = new JButtonUploadFile("Upload new image", imagesPanel, this);
         add(uploadImageButton);
+
+        jComboBox = new JComboBoxPaginator(imagesPanel.getPagesAsArray(), imagesPanel, this);
+        add(jComboBox);
     }
 
     public JButton getUploadImageButton() {
@@ -21,7 +27,11 @@ public class FunctionalPanel extends JPanel {
         return jComboBox;
     }
 
-    public void setjComboBox(JComboBox jComboBox) {
+    public void updatePagesComboBox(String[] pages){
+        jComboBox = new JComboBoxPaginator(pages, imagesPanel, this);
+    }
+
+    public void setjComboBox(JComboBoxPaginator jComboBox) {
         this.jComboBox = jComboBox;
     }
 
