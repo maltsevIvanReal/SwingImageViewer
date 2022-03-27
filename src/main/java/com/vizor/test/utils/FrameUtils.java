@@ -3,7 +3,7 @@ package com.vizor.test.utils;
 import javax.swing.*;
 import java.awt.*;
 
-public final class FrameUtils {
+public class FrameUtils {
     private static final int WIDTH = 1024;
     private static final int HEIGHT = 768;
 

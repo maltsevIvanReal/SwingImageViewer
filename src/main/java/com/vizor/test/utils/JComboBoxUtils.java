@@ -1,7 +1,7 @@
 package com.vizor.test.utils;
 
 
-import com.vizor.test.panel.ImagesPanel;
+import com.vizor.test.components.ImagesPanel;
 
 import javax.swing.*;
 

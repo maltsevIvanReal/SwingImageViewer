@@ -1,4 +1,4 @@
-package com.vizor.test.panel;
+package com.vizor.test.components;
 
 import com.vizor.test.utils.FrameUtils;
 
@@ -10,7 +10,6 @@ public class MainPanel extends JPanel {
     public MainPanel() {
         setLayout(new GridLayout());
         setPreferredSize(new Dimension(FrameUtils.getWIDTH(), FrameUtils.getHEIGHT()));
-        setBorder(BorderFactory.createLineBorder(Color.ORANGE));
 
         ImagesPanel imagesPanel = new ImagesPanel();
         FunctionalPanel functionalPanel = new FunctionalPanel(imagesPanel);

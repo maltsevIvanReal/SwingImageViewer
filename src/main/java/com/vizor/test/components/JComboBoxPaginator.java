@@ -1,12 +1,10 @@
-package com.vizor.test.panel;
+package com.vizor.test.components;
 
 import com.vizor.test.utils.PanelUtils;
 
 import javax.swing.*;
-import java.io.File;
-import java.util.ArrayList;
 
-public class JComboBoxPaginator extends JComboBox<String> {
+public final class JComboBoxPaginator extends JComboBox<String> {
 
     JComboBoxPaginator(String[] pages, ImagesPanel imagesPanel, FunctionalPanel functionalPanel){
         super(pages);
@@ -15,22 +13,21 @@ public class JComboBoxPaginator extends JComboBox<String> {
             int selectedPageNumber = Integer.parseInt((String) getSelectedItem());
             imagesPanel.setCurrentPageSelected(selectedPageNumber);
             disable();
-            start(imagesPanel.getAllFiles(), selectedPageNumber, imagesPanel.getLabels(), imagesPanel, functionalPanel);
+            start(selectedPageNumber, imagesPanel.getLabels(), imagesPanel, functionalPanel);
         });
     }
 
-    private void start(ArrayList<File> allFiles, int selectedPageNumber, JLabel[] label, ImagesPanel imagesPanel, FunctionalPanel functionalPanel) {
+    private void start(int selectedPageNumber, ImageJLabel[] label, ImagesPanel imagesPanel, FunctionalPanel functionalPanel) {
         if (imagesPanel.getSwingWorkerPaginate() != null && !imagesPanel.getSwingWorkerPaginate().getState().equals(SwingWorker.StateValue.DONE)) {
             return;
         }
         JFrame mainFrame = (JFrame) SwingUtilities.getAncestorOfClass(JFrame.class, functionalPanel);
-        SwingWorker<Void, Void> swingWorker = new SwingWorker<Void, Void>() {
+        SwingWorker<Void, Void> swingWorker = new SwingWorker<>() {
             @Override
             protected Void doInBackground() {
                 PanelUtils.clearJPanel(imagesPanel);
                 imagesPanel.addLoaderAtImagePage(mainFrame);
-                System.out.println(imagesPanel.getCurrentPageSelected() + " fill");
-                imagesPanel.fillImagesPanel(allFiles, imagesPanel.getDisplayFrom(selectedPageNumber, allFiles), label, imagesPanel);
+                imagesPanel.fillImagesPanel(imagesPanel.getDisplayFrom(selectedPageNumber), label, imagesPanel);
                 return null;
             }
 

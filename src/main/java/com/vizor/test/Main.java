@@ -1,6 +1,6 @@
 package com.vizor.test;
 
-import com.vizor.test.panel.MainPanel;
+import com.vizor.test.components.MainPanel;
 import com.vizor.test.utils.FrameUtils;
 
 import javax.swing.*;
