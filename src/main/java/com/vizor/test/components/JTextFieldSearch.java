@@ -35,7 +35,7 @@ public final class JTextFieldSearch extends JTextField {
     private void start(ImagesPanel imagesPanel, FunctionalPanel functionalPanel) {
         JFrame mainFrame = (JFrame) SwingUtilities.getAncestorOfClass(JFrame.class, functionalPanel);
 
-        SwingWorker<Void, Void> swingWorker = new SwingWorker<>() {
+        SwingWorker<Void, Void> swingWorker = new SwingWorker<Void, Void>() {
             @Override
             protected Void doInBackground() {
                 imagesPanel.filterImagesByString(getText());

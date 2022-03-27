@@ -22,7 +22,7 @@ public final class JComboBoxPaginator extends JComboBox<String> {
             return;
         }
         JFrame mainFrame = (JFrame) SwingUtilities.getAncestorOfClass(JFrame.class, functionalPanel);
-        SwingWorker<Void, Void> swingWorker = new SwingWorker<>() {
+        SwingWorker<Void, Void> swingWorker = new SwingWorker<Void, Void>() {
             @Override
             protected Void doInBackground() {
                 PanelUtils.clearJPanel(imagesPanel);
